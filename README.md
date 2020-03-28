@@ -56,3 +56,16 @@ Before contributing to Keycloak please read our [contributing guidelines](CONTRI
 ## License
 
 * [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
+## docker build
+cd ../keycloak
+mvn -Pdistribution -pl distribution/server-dist -am -Dmaven.test.skip clean install
+cd distribution/server-dist/target
+python -m SimpleHTTPServer 8000 &
+
+cd ../../../keycloak-container/server 
+docker build -t 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:7.0.0 --build-arg KEYCLOAK_DIST=http://172.30.1.40:8000/keycloak-7.0.0.tar.gz . 
+docker push 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:7.0.0
+
+3. aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:7.0.0
+docker push 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:7.0.0
