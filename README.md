@@ -67,5 +67,5 @@ cd ../../../keycloak-container/server
 docker build -t 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:7.0.0 --build-arg KEYCLOAK_DIST=http://172.30.1.40:8000/keycloak-7.0.0.tar.gz . 
 docker push 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:7.0.0
 
-3. aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:7.0.0
+aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com
 docker push 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:7.0.0
