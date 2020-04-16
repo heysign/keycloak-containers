@@ -58,16 +58,11 @@ Before contributing to Keycloak please read our [contributing guidelines](CONTRI
 * [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
 ## docker build
-cd ../keycloak
-mvn -Pdistribution -pl distribution/server-dist -am -Dmaven.test.skip clean install
-cd distribution/server-dist/target
-python -m SimpleHTTPServer 8000 &
-
-cd ../../../keycloak-container/server 
-docker build -t 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:7.0.0 --build-arg KEYCLOAK_DIST=http://172.30.1.40:8000/keycloak-7.0.0.tar.gz . 
-docker tag 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:7.0.0 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest
-docker push 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:7.0.0
-docker push 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest
-
-aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com
-docker push 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:7.0.0
+1.  cd ../keycloak
+2.  mvn -Pdistribution -pl distribution/server-dist -am -Dmaven.test.skip clean install
+3.  cd distribution/server-dist/target
+4.  python -m SimpleHTTPServer 8000 &
+5.  cd ../../../keycloak-container/server 
+6.  docker build -t 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest --build-arg KEYCLOAK_DIST=http://172.30.1.40:8000/keycloak-7.0.0.tar.gz . 
+7.  aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com
+8.  docker push 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest
