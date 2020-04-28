@@ -61,7 +61,7 @@ Before contributing to Keycloak please read our [contributing guidelines](CONTRI
 1.  cd ../keycloak
 2.  mvn -Pdistribution -pl distribution/server-dist -am -Dmaven.test.skip clean install
 3.  cd distribution/server-dist/target
-4.  python -m SimpleHTTPServer 8000 &
+4.  python -m SimpleHTTPServer 8000
 5.  cd ../../../keycloak-container/server 
 6.  docker build -t 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest --build-arg KEYCLOAK_DIST=http://172.30.1.40:8000/keycloak-7.0.0.tar.gz . 
 7.  aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com
