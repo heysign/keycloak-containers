@@ -59,15 +59,12 @@ Before contributing to Keycloak please read our [contributing guidelines](CONTRI
 
 ## docker build
 1.  cd ../keycloak
-2.  mvn -Pdistribution -pl distribution/server-dist -am -Dmaven.test.skip clean install
+2.  sudo mvn -Pdistribution -pl distribution/server-dist -am -Dmaven.test.skip clean install
 3.  cd distribution/server-dist/target
 4.  python -m SimpleHTTPServer 8989
 5.  cd ../../../keycloak-container/server
-6.  docker rmi 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest
-7.  docker build -t 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest --build-arg KEYCLOAK_DIST=http://192.168.1.85:8989/keycloak-7.0.0.tar.gz . 
-8.  aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com
-9.  docker push 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest
-
-if docker login --password-stdin does not exist, run following commands
-export AWS_PASSWORD=$(aws ecr get-login-password --region ap-northeast-2)
-docker login --username AWS --password ${AWS_PASSWORD} 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com
+6.  sudo docker rmi 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest
+7.  sudo docker build -t 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest --build-arg KEYCLOAK_DIST=http://192.168.1.85:8989/keycloak-7.0.0.tar.gz . 
+8.  export AWS_PASSWORD=$(aws ecr get-login-password --region ap-northeast-2)
+9.  sudo docker login --username AWS --password ${AWS_PASSWORD} 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com
+10.  sudo docker push 371711804553.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest
