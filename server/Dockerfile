@@ -21,7 +21,11 @@ ARG KEYCLOAK_DIST_FILE_NAME=keycloak-$KEYCLOAK_VERSION.tar.gz
 
 USER root
 
-RUN yum update -y && yum install -y epel-release git && yum install -y jq openssl which && yum clean all
+RUN yum install -y wget
+RUN wget http://mirror.centos.org/centos/7/extras/x86_64/Packages/epel-release-7-11.noarch.rpm
+RUN rpm -Uvh epel-release-7-11.noarch.rpm
+RUN yum-config-manager --disable epel
+RUN yum update -y && yum install -y git && yum install -y jq openssl which && yum clean all
 
 ADD tools /opt/jboss/tools
 RUN /opt/jboss/tools/build-keycloak.sh
