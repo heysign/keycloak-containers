@@ -64,18 +64,18 @@ Before contributing to Keycloak please read our [contributing guidelines](CONTRI
 3.  cd distribution/server-dist/target
 4.  python -m SimpleHTTPServer 8989
 5.  cd ../../../keycloak-container/server
-6.  docker rmi 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest
+6.  docker rmi 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/instsign-keycloak:latest
 7.  docker system prune
-8.  docker build --no-cache -t 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest --build-arg KEYCLOAK_DIST=http://192.168.1.85:8989/keycloak-7.0.0.tar.gz . 
+8.  docker build --no-cache -t 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/instsign-keycloak:latest --build-arg KEYCLOAK_DIST=http://192.168.1.85:8989/keycloak-7.0.0.tar.gz . 
 9.  export AWS_PASSWORD=$(aws ecr get-login-password --region ap-northeast-2)
 10.  docker login --username AWS --password ${AWS_PASSWORD} 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com
-11.  docker push 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest
+11.  docker push 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/instsign-keycloak:latest
 -->
 1.  cd server
-2.  docker rmi 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest
-3.  docker build -t 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest --build-arg GIT_REPO=jjangyoonjoo/keycloak --build-arg GIT_BRANCH=add-social-provider .
+2.  docker rmi 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/instsign-keycloak:latest
+3.  docker build -t 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/instsign-keycloak:latest --build-arg GIT_REPO=jjangyoonjoo/keycloak --build-arg GIT_BRANCH=add-social-provider .
 4.  export AWS_PASSWORD=$(aws ecr get-login-password --region ap-northeast-2)
 5.  docker login --username AWS --password ${AWS_PASSWORD} 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com
-6.  docker push 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/keycloak-repository:latest
+6.  docker push 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/instsign-keycloak:latest
 
 aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com
