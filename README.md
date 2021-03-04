@@ -60,22 +60,16 @@ Before contributing to Keycloak please read our [contributing guidelines](CONTRI
 ## docker build
 <!--
 1.  cd ../keycloak
-2.  mvn -Pdistribution -pl distribution/server-dist -am -Dmaven.test.skip clean install
+2.  mvn -Pdistribution -pl distribution/server-dist -am -DmskipTests clean install
 3.  cd distribution/server-dist/target
 4.  python -m SimpleHTTPServer 9898
 5.  cd ../../../keycloak-container/server
-6.  docker rmi 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/instsign-keycloak:test
+6.  docker rmi docker.heysign.co.kr:5010/heysign-keycloak:test
 7.  docker system prune
-8.  docker build --no-cache -t 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/instsign-keycloak:test --build-arg KEYCLOAK_DIST=http://192.168.1.85:9898/keycloak-7.0.0-instsign.tar.gz . 
-9.  export AWS_PASSWORD=$(aws ecr get-login-password --region ap-northeast-2)
-10.  docker login --username AWS --password ${AWS_PASSWORD} 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com
-11.  docker push 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/instsign-keycloak:test
+8.  docker build -t docker.heysign.co.kr:5010/heysign-keycloak:test --build-arg KEYCLOAK_DIST=http://192.168.0.11:9898/keycloak-7.0.0-heysign.tar.gz . 
+9.  docker push docker.heysign.co.kr:5010/heysign-keycloak:test
 -->
 1.  cd server
-2.  docker rmi 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/instsign-keycloak:test
-3.  docker build -t 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/instsign-keycloak:test --build-arg GIT_REPO=developers-blocko/keycloak --build-arg GIT_BRANCH=test .
-4.  export AWS_PASSWORD=$(aws ecr get-login-password --region ap-northeast-2)
-5.  docker login --username AWS --password ${AWS_PASSWORD} 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com
-6.  docker push 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com/instsign-keycloak:test
-
-aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 551099732354.dkr.ecr.ap-northeast-2.amazonaws.com
+2.  docker rmi docker.heysign.co.kr:5010/heysign-keycloak:test
+3.  docker build -t docker.heysign.co.kr:5010/heysign-keycloak:test --build-arg GIT_REPO=heysign/keycloak --build-arg GIT_BRANCH=test .
+6.  docker push docker.heysign.co.kr:5010/heysign-keycloak:test
