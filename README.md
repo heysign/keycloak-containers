@@ -60,13 +60,13 @@ Before contributing to Keycloak please read our [contributing guidelines](CONTRI
 ## docker build
 <!--
 1.  cd ../keycloak
-2.  mvn -Pdistribution -pl distribution/server-dist -am -DmskipTests clean install
+2.  mvn -Pdistribution -pl distribution/server-dist -am -DskipTests clean install
 3.  cd distribution/server-dist/target
 4.  python -m SimpleHTTPServer 9898
 5.  cd ../../../keycloak-container/server
 6.  docker rmi docker.heysign.co.kr:5010/heysign-keycloak:test
 7.  docker system prune
-8.  docker build -t docker.heysign.co.kr:5010/heysign-keycloak:test --build-arg KEYCLOAK_DIST=http://192.168.0.11:9898/keycloak-7.0.0-heysign.tar.gz . 
+8.  docker build -t docker.heysign.co.kr:5010/heysign-keycloak:test --build-arg KEYCLOAK_DIST=http://192.168.0.5:9898/keycloak-7.0.0-heysign.tar.gz . 
 9.  docker push docker.heysign.co.kr:5010/heysign-keycloak:test
 -->
 1.  cd server
